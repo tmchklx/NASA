@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Logger {
+struct Logger {
     private enum LogLevel: String {
         case error = "[❌ ERROR]"
         case warning = "[⚠️ WARNING]"
