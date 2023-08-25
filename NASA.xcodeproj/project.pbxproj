@@ -9,25 +9,47 @@
 /* Begin PBXBuildFile section */
 		86D887392A977E630010E2F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887382A977E630010E2F3 /* AppDelegate.swift */; };
 		86D8873B2A977E630010E2F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8873A2A977E630010E2F3 /* SceneDelegate.swift */; };
-		86D8873D2A977E630010E2F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8873C2A977E630010E2F3 /* ViewController.swift */; };
 		86D887422A977E650010E2F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D887412A977E650010E2F3 /* Assets.xcassets */; };
 		86D887452A977E650010E2F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86D887432A977E650010E2F3 /* LaunchScreen.storyboard */; };
 		86D887562A978FB10010E2F3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887552A978FB10010E2F3 /* Logger.swift */; };
 		86D887592A9790AE0010E2F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887582A9790AE0010E2F3 /* Endpoint.swift */; };
 		86D8875B2A9790CC0010E2F3 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8875A2A9790CC0010E2F3 /* DataProvider.swift */; };
+		86D8875F2A9792D50010E2F3 /* NasaDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8875E2A9792D50010E2F3 /* NasaDataProvider.swift */; };
+		86D887612A9794300010E2F3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887602A9794300010E2F3 /* Photo.swift */; };
+		86D887632A97A5A30010E2F3 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887622A97A5A30010E2F3 /* Rover.swift */; };
+		86D887672A97B07D0010E2F3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887662A97B07D0010E2F3 /* HomeViewController.swift */; };
+		86D887692A97D1C20010E2F3 /* MarsPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887682A97D1C20010E2F3 /* MarsPhotosCollectionViewCell.swift */; };
+		86D8876D2A97D6090010E2F3 /* HomeViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8876C2A97D6090010E2F3 /* HomeViewControllerView.swift */; };
+		86D887712A98A5690010E2F3 /* SettingsViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887702A98A5690010E2F3 /* SettingsViewControllerView.swift */; };
+		86D887732A98A7190010E2F3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887722A98A7190010E2F3 /* SettingsViewController.swift */; };
+		86D887752A98A9840010E2F3 /* SettingsOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887742A98A9840010E2F3 /* SettingsOptionCollectionViewCell.swift */; };
+		86D887772A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887762A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift */; };
+		86D8877B2A98CE620010E2F3 /* CollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8877A2A98CE620010E2F3 /* CollectionViewSectionHeader.swift */; };
+		86D887862A9929510010E2F3 /* UIColor+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D887852A9929510010E2F3 /* UIColor+constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		86D887352A977E630010E2F3 /* NASA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D887382A977E630010E2F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86D8873A2A977E630010E2F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		86D8873C2A977E630010E2F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		86D887412A977E650010E2F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86D887442A977E650010E2F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86D887462A977E650010E2F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86D887552A978FB10010E2F3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		86D887582A9790AE0010E2F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		86D8875A2A9790CC0010E2F3 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		86D8875E2A9792D50010E2F3 /* NasaDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataProvider.swift; sourceTree = "<group>"; };
+		86D887602A9794300010E2F3 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		86D887622A97A5A30010E2F3 /* Rover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
+		86D887662A97B07D0010E2F3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		86D887682A97D1C20010E2F3 /* MarsPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		86D8876C2A97D6090010E2F3 /* HomeViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerView.swift; sourceTree = "<group>"; };
+		86D887702A98A5690010E2F3 /* SettingsViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerView.swift; sourceTree = "<group>"; };
+		86D887722A98A7190010E2F3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		86D887742A98A9840010E2F3 /* SettingsOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		86D887762A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		86D8877A2A98CE620010E2F3 /* CollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionHeader.swift; sourceTree = "<group>"; };
+		86D887852A9929510010E2F3 /* UIColor+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+constants.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				86D8875C2A97925E0010E2F3 /* API */,
-				86D887382A977E630010E2F3 /* AppDelegate.swift */,
-				86D8873A2A977E630010E2F3 /* SceneDelegate.swift */,
-				86D8873C2A977E630010E2F3 /* ViewController.swift */,
+				86D887842A9924E30010E2F3 /* Application */,
+				86D8877C2A9923DB0010E2F3 /* Screens */,
 				86D887572A978FB40010E2F3 /* Utilities */,
 				86D887412A977E650010E2F3 /* Assets.xcassets */,
 				86D887432A977E650010E2F3 /* LaunchScreen.storyboard */,
@@ -75,6 +96,7 @@
 		86D887572A978FB40010E2F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				86D887872A992A640010E2F3 /* Extensions */,
 				86D887552A978FB10010E2F3 /* Logger.swift */,
 			);
 			path = Utilities;
@@ -84,9 +106,100 @@
 			isa = PBXGroup;
 			children = (
 				86D887582A9790AE0010E2F3 /* Endpoint.swift */,
-				86D8875A2A9790CC0010E2F3 /* DataProvider.swift */,
+				86D887622A97A5A30010E2F3 /* Rover.swift */,
+				86D8875D2A9792C30010E2F3 /* DataProvider */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		86D8875D2A9792C30010E2F3 /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				86D8875A2A9790CC0010E2F3 /* DataProvider.swift */,
+				86D8875E2A9792D50010E2F3 /* NasaDataProvider.swift */,
+				86D887602A9794300010E2F3 /* Photo.swift */,
+			);
+			path = DataProvider;
+			sourceTree = "<group>";
+		};
+		86D8877C2A9923DB0010E2F3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				86D8877D2A9923E90010E2F3 /* ViewControllers */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		86D8877D2A9923E90010E2F3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				86D8877E2A99241A0010E2F3 /* SettingsViewControler */,
+				86D887802A9924480010E2F3 /* HomeViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86D8877E2A99241A0010E2F3 /* SettingsViewControler */ = {
+			isa = PBXGroup;
+			children = (
+				86D887722A98A7190010E2F3 /* SettingsViewController.swift */,
+				86D8877F2A9924320010E2F3 /* ViewElements */,
+			);
+			path = SettingsViewControler;
+			sourceTree = "<group>";
+		};
+		86D8877F2A9924320010E2F3 /* ViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				86D887702A98A5690010E2F3 /* SettingsViewControllerView.swift */,
+				86D887762A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift */,
+				86D8877A2A98CE620010E2F3 /* CollectionViewSectionHeader.swift */,
+				86D887742A98A9840010E2F3 /* SettingsOptionCollectionViewCell.swift */,
+			);
+			path = ViewElements;
+			sourceTree = "<group>";
+		};
+		86D887802A9924480010E2F3 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				86D887662A97B07D0010E2F3 /* HomeViewController.swift */,
+				86D887812A9924610010E2F3 /* ViewElements */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		86D887812A9924610010E2F3 /* ViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				86D8876C2A97D6090010E2F3 /* HomeViewControllerView.swift */,
+				86D887682A97D1C20010E2F3 /* MarsPhotosCollectionViewCell.swift */,
+			);
+			path = ViewElements;
+			sourceTree = "<group>";
+		};
+		86D887842A9924E30010E2F3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				86D887382A977E630010E2F3 /* AppDelegate.swift */,
+				86D8873A2A977E630010E2F3 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		86D887872A992A640010E2F3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86D887882A992A6E0010E2F3 /* UIColor */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		86D887882A992A6E0010E2F3 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				86D887852A9929510010E2F3 /* UIColor+constants.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,12 +272,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86D887672A97B07D0010E2F3 /* HomeViewController.swift in Sources */,
+				86D887612A9794300010E2F3 /* Photo.swift in Sources */,
+				86D887752A98A9840010E2F3 /* SettingsOptionCollectionViewCell.swift in Sources */,
 				86D8875B2A9790CC0010E2F3 /* DataProvider.swift in Sources */,
-				86D8873D2A977E630010E2F3 /* ViewController.swift in Sources */,
+				86D8876D2A97D6090010E2F3 /* HomeViewControllerView.swift in Sources */,
+				86D887862A9929510010E2F3 /* UIColor+constants.swift in Sources */,
+				86D887712A98A5690010E2F3 /* SettingsViewControllerView.swift in Sources */,
+				86D8877B2A98CE620010E2F3 /* CollectionViewSectionHeader.swift in Sources */,
+				86D8875F2A9792D50010E2F3 /* NasaDataProvider.swift in Sources */,
+				86D887732A98A7190010E2F3 /* SettingsViewController.swift in Sources */,
+				86D887772A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				86D887392A977E630010E2F3 /* AppDelegate.swift in Sources */,
+				86D887632A97A5A30010E2F3 /* Rover.swift in Sources */,
 				86D8873B2A977E630010E2F3 /* SceneDelegate.swift in Sources */,
 				86D887562A978FB10010E2F3 /* Logger.swift in Sources */,
 				86D887592A9790AE0010E2F3 /* Endpoint.swift in Sources */,
+				86D887692A97D1C20010E2F3 /* MarsPhotosCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

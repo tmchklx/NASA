@@ -18,11 +18,11 @@ enum Endpoint: String {
     static let apiKey = "9glLVLOzpJabphxgQ8YHpXYx5bBAoT7XXhzlkgQM"
 
     case earthDate = "/api/v1/rovers/[rover]/photos?earth_date=[date]&api_key=[key]"
-    case sol = "/api/v1/rovers/[rover]/photos?sol=[date]&api_key=[key]"
+//    case sol = "/api/v1/rovers/[rover]/photos?sol=[date]&api_key=[key]"
 
-    func url(forRover rover: String, on date: String) throws -> URL {
+    func url(forRover rover: Rover, on date: String) throws -> URL {
         var path: String = rawValue
-        path = path.replacingOccurrences(of: "[rover]", with: rover)
+        path = path.replacingOccurrences(of: "[rover]", with: rover.rawValue)
         path = path.replacingOccurrences(of: "[date]", with: date)
         path = path.replacingOccurrences(of: "[key]", with: Self.apiKey)
 
