@@ -7,12 +7,13 @@
 
 import UIKit
 
-class CollectionViewSectionHeader: UICollectionReusableView {
-    static let identifier = "SectionHeader"
+final class CollectionViewSectionHeader: UICollectionReusableView {
+    static let identifier = Identifier.sectionHeader
+    
     let title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 24)
+        label.font = FontConstants.boldHeader
         return label
     }()
 
