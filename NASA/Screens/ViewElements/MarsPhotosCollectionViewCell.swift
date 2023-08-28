@@ -8,14 +8,14 @@
 import UIKit
 
 class MarsPhotosCollectionViewCell: UICollectionViewCell {
-    static let identifier = "marsPhotosCell"
+    static let identifier = Identifier.marsPhotosCell
 
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
+    var imageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "iphone")
+        imageView.image = UIImage(named: ImageName.placeHolder)
         return imageView
     }()
 

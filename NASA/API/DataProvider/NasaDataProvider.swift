@@ -6,30 +6,79 @@
 //
 
 import Foundation
-//
-//final class NasaDataProvider {
-//    func data(for endpoint: Endpoint, rover: String?, date: String?, httpMethod: HTTPMethod) async throws -> [Photo] {
-//        guard let rover = rover, let date = date else { throw DataProviderError.noDataReceived }
-//        var request = URLRequest(url: try endpoint.url(forRover: rover, on: date))
-//    }
-//
-//    private func fetchData(url: URL, body: Data? = nil, httpMethod: HTTPMethod = .get, accessToken: String)
-//        async throws -> Data
-//    {
-//        var request = URLRequest(url: url)
-//        let (data, response) = try await URLSession.shared.data(for: request)
-//
-//        let statusCodeUnauthorized = 401
-//        if let httpResponse = response as? HTTPURLResponse,
-//            httpResponse.statusCode == statusCodeUnauthorized
-//        {
-//            Logger.info("Received HTTP response 401, assuming we've been logged out.")
-//            loginInfo = nil
-//        }
-//
-//        return data
-//    }
-//
-//
-//}
 
+enum DataProviderError: Error {
+    case noDataReceived
+    case invalidURL
+    case failedToDecode
+    case invalidData
+
+}
+
+final class NasaDataProvider {
+    func data(
+        for endpoint: Endpoint,
+        completion: @escaping (Result<[Photo], DataProviderError>) -> Void) {
+            guard let url = endpoint.url() else {
+                completion(.failure(.invalidURL))
+                return
+            }
+
+            fetchData(from: url) { [ weak self ] response in
+                guard let self = self else {
+                    Logger.error("Object seems to be already dealocated.")
+                    return
+                }
+
+                switch response {
+                case .success(let data):
+                    do {
+                        let nasaDecodedData = try self.decodeAPIResponse(data)
+                        guard let safeNasaDecodedData = nasaDecodedData else {
+                            completion(.failure(.invalidData))
+                            return
+                        }
+
+                        completion(.success(safeNasaDecodedData))
+                    } catch { }
+                case .failure(_):
+                    completion(.failure(.noDataReceived))
+                }
+            }
+        }
+
+    private func fetchData(from url: URL, completion: @escaping (Result<Data, DataProviderError>) -> Void) {
+        let session = URLSession(configuration: .ephemeral)
+        session.downloadTask(with: url) { fileURL, _, error in
+            if error != nil {
+                completion(.failure(.noDataReceived))
+            }
+
+            guard let url = fileURL, let data = try? Data(contentsOf: url) else {
+                completion(.failure(.invalidData))
+                return
+            }
+
+            completion(.success(data))
+        }.resume()
+    }
+
+    private func decodeAPIResponse(_ data: Data) throws -> [Photo]? {
+        do {
+            let decoder = JSONCoder()
+            let nasaData = try decoder.decode(type: Nasa.self, from: data)
+
+            if let photos = nasaData.photos {
+                return photos
+            } else if let latestPhotos = nasaData.latestPhotos {
+                return latestPhotos
+            } else {
+                return nil
+            }
+
+        } catch {
+            throw DataProviderError.failedToDecode
+        }
+
+    }
+}
