@@ -15,10 +15,10 @@ fileprivate struct SettingsViewControllerConstants {
 
 final class SettingsViewController: UIViewController {
     private let settingsView = SettingsViewControllerView()
-    private let viewModel = SettingViewViewModel()
+    private let viewModel = RequestDataModel()
     private let constants = SettingsViewControllerConstants()
 
-    var passDataOnDismiss: ((SettingViewViewModel) -> Void)?
+    var passDataOnDismiss: ((RequestDataModel) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,17 @@ final class SettingsViewController: UIViewController {
 
     private func addTargetsAndDelegates() {
         settingsView.settingsOptionsCollectionView.delegate = self
-        settingsView.applySelectionButton.addTarget(self, action: #selector(applySettings), for: .touchUpInside)
-        settingsView.datePicker.addTarget(self, action: #selector(selectDate(_:)), for: .valueChanged)
+        settingsView.applySelectionButton.addTarget(
+            self,
+            action: #selector(applySettings),
+            for: .touchUpInside
+        )
+
+        settingsView.datePicker.addTarget(
+            self,
+            action: #selector(selectDate(_:)),
+            for: .valueChanged
+        )
     }
 
 // MARK: - selectors
