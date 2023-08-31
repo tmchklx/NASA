@@ -31,33 +31,48 @@ final class HomeViewController: UIViewController {
     private func setupNavigationBar() {
         navigationItem.title = "NASA"
 
-        let barButton = UIBarButtonItem(customView: homeScreenView.navigationBarButton)
-        let currentWidth = barButton.customView?.widthAnchor.constraint(equalToConstant: constants.barButtonSize.width)
-        currentWidth?.isActive = true
-        let currentHeight = barButton.customView?.heightAnchor.constraint(equalToConstant: constants.barButtonSize.height)
-        currentHeight?.isActive = true
+        let settingsBarButton = UIBarButtonItem(customView: homeScreenView.settingBarButton)
+        let settingsButtonCurrentWidth = settingsBarButton.customView?.widthAnchor.constraint(
+            equalToConstant: constants.barButtonSize.width)
+        let settingsButtonCurrentHeight = settingsBarButton.customView?.heightAnchor.constraint(
+            equalToConstant: constants.barButtonSize.height)
+        settingsButtonCurrentWidth?.isActive = true
+        settingsButtonCurrentHeight?.isActive = true
 
-        if let appearance = navigationController?.navigationBar.scrollEdgeAppearance {
-            appearance.backgroundColor = .white
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        }
+        let historyBarButton = UIBarButtonItem(customView: homeScreenView.searchHistoryBarButton)
+        let historyButtonCurrentWidth = historyBarButton.customView?.widthAnchor.constraint(
+            equalToConstant: constants.barButtonSize.width)
+        let historyButtonCurrentHeight = historyBarButton.customView?.heightAnchor.constraint(
+            equalToConstant: constants.barButtonSize.height)
+        historyButtonCurrentWidth?.isActive = true
+        historyButtonCurrentHeight?.isActive = true
 
-        navigationItem.rightBarButtonItem = barButton
+        navigationItem.leftBarButtonItem = historyBarButton
+        navigationItem.rightBarButtonItem = settingsBarButton
     }
 
     private func addDelegatesAndTargets() {
         homeScreenView.marsPhotosCollectionView.delegate = self
         homeScreenView.marsPhotosCollectionView.dataSource = self
-        homeScreenView.navigationBarButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        homeScreenView.settingBarButton.addTarget(
+            self,
+            action: #selector(settingsButtonTapped),
+            for: .touchUpInside
+        )
+
+        homeScreenView.searchHistoryBarButton.addTarget(
+            self,
+            action: #selector(searchHistoryButtonTapped),
+            for: .touchUpInside
+        )
     }
 
     private func loadDataAtAppLaunch() {
-        homeViewModel.fetchData(for: .allRoversCameras(rover: .curiosity, date: "2023-08-01")) {
+        homeViewModel.fetchData(for: .latestPhotos(rover: .curiosity)) {
             self.homeViewModel.loadBatch {
                 DispatchQueue.main.async {
                     self.homeScreenView.marsPhotosCollectionView.reloadData()
                 }
-
             }
         }
     }
@@ -93,21 +108,44 @@ final class HomeViewController: UIViewController {
     @objc private func settingsButtonTapped() {
         let destinationViewController = SettingsViewController()
         destinationViewController.modalPresentationStyle = .popover
-        destinationViewController.passDataOnDismiss = { [ weak self ] viewModel in
+        destinationViewController.passDataOnDismiss = { [ weak self ] dataModel in
+            self?.homeViewModel.saveSearchToDataBase(with: dataModel)
+
             guard let self = self else {
                 Logger.error("Object seems to be already dealocated.")
                 return
             }
 
-            self.homeViewModel.fetchData(for: viewModel.generatedEndpoint) {
+            self.homeViewModel.fetchData(for: dataModel.generatedEndpoint) {
                 self.homeViewModel.loadBatch {
                     DispatchQueue.main.async {
                         self.homeScreenView.marsPhotosCollectionView.reloadData()
+                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint.zero, animated: true)
                     }
                 }
             }
         }
         present(destinationViewController, animated: true)
+    }
+
+    @objc private func searchHistoryButtonTapped() {
+        let destinationViewController = SearchHistoryViewController()
+        destinationViewController.passDataOnDismiss = { [ weak self ] dataModel in
+            guard let self = self else {
+                Logger.error("Object seems to be already dealocated.")
+                return
+            }
+
+            self.homeViewModel.fetchData(for: dataModel.generatedEndpoint) {
+                self.homeViewModel.loadBatch {
+                    DispatchQueue.main.async {
+                        self.homeScreenView.marsPhotosCollectionView.reloadData()
+                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint.zero, animated: true)
+                    }
+                }
+            }
+        }
+        navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }
 

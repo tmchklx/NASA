@@ -26,7 +26,7 @@ final class HomeViewControllerView: UIView {
         return layout
     }()
 
-    let navigationBarButton: UIButton = {
+    let settingBarButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: ImageName.slider), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +39,14 @@ final class HomeViewControllerView: UIView {
         progress.hidesWhenStopped = true
         return progress
     }()
+
+    let searchHistoryBarButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: ImageName.searchHistory), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private lazy var collectionConstraintsWithProgressView = [
         marsPhotosCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
         marsPhotosCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),

@@ -8,10 +8,6 @@
 import UIKit
 
 final class HomeViewModel {
-    var onDataReceived: ((Bool) -> Void)?
-    var currentPage = 0
-    var photos: [UIImage] = []
-    var didFetchNasaData = false
     private var nasaData: [Photo] = [] {
         didSet {
             if oldValue != nasaData {
@@ -36,7 +32,20 @@ final class HomeViewModel {
     }
 
     private let dataProvider = NasaDataProvider()
+
+    var onDataReceived: ((Bool) -> Void)?
+    var currentPage = 0
+    var photos: [UIImage] = []
+    var didFetchNasaData = false
     let cache = NSCache<NSString, UIImage>()
+
+    func saveSearchToDataBase(with model: RequestDataModel) {
+        let query = SearchHistory(context: SearchHistory.viewContext)
+        query.rover = model.rover.rawValue
+        query.camera = model.camera.rawValue
+        query.date = model.date
+        query.save()
+    }
 
     func fetchURLString(for index: Int) -> String {
         return nasaData[index].imgSrc
@@ -45,7 +54,7 @@ final class HomeViewModel {
     func fetchData(for endpoint: Endpoint, completion: @escaping () -> Void) {
         didFetchNasaData = false
         currentPage = 0
-        dataProvider.data(for: endpoint) { [ weak self ]response in
+        dataProvider.data(for: endpoint) { [ weak self ] response in
             guard let self = self else {
                 self?.didFetchNasaData = false
                 Logger.error("Object seems to be already dealocated.")
@@ -98,7 +107,7 @@ final class HomeViewModel {
 
     }
 
-    func loadPhoto(from url: URL?, completion: @escaping (UIImage?) -> Void) {
+    private func loadPhoto(from url: URL?, completion: @escaping (UIImage?) -> Void) {
         guard let url = url else { return }
 
         if let image = cache.object(forKey: NSString(string: url.absoluteString)) {

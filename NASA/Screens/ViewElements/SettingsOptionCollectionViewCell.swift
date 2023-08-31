@@ -30,12 +30,12 @@ final class SettingsOptionCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Views Initialization
     private let roundedRectangularView: UIView = {
-        let button = UIView()
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = ColorConstants.unselectedSettingOption
-        return button
+        let roundedRectengular = UIView()
+        roundedRectengular.layer.cornerRadius = 10
+        roundedRectengular.layer.masksToBounds = true
+        roundedRectengular.translatesAutoresizingMaskIntoConstraints = false
+        roundedRectengular.backgroundColor = ColorConstants.unselectedSettingOption
+        return roundedRectengular
     }()
 
     private let buttonLabel: UILabel = {

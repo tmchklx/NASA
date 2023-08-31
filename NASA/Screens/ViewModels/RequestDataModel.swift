@@ -1,5 +1,5 @@
 //
-//  SettingsViewViewModel.swift
+//  RequestDataModel.swift
 //  NASA
 //
 //  Created by Oleksandr Tymchenko on 8/27/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingViewViewModel {
+class RequestDataModel {
     var date: String = PersistantSettings.shared.date
     var rover: Rover = PersistantSettings.shared.rover
     var camera: Camera = PersistantSettings.shared.camera
@@ -20,8 +20,9 @@ class SettingViewViewModel {
         }
     }
 
-    init(rover: Rover = .curiosity, camera: Camera = .all) {
+    init(rover: Rover = .curiosity, camera: Camera = .all, date: String = Date().convertToString) {
         self.rover = rover
         self.camera = camera
+        self.date = date
     }
 }
