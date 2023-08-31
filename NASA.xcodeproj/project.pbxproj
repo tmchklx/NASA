@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		860F02BE2AA0C0BA008D5022 /* BaseCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860F02BD2AA0C0BA008D5022 /* BaseCoreDataModel.swift */; };
+		860F02C02AA0C0DB008D5022 /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860F02BF2AA0C0DB008D5022 /* CoreDataProvider.swift */; };
+		860F02C32AA0C105008D5022 /* NasaSearchHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 860F02C12AA0C105008D5022 /* NasaSearchHistory.xcdatamodeld */; };
+		860F02C52AA0C193008D5022 /* SearchHistory+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860F02C42AA0C193008D5022 /* SearchHistory+Extensions.swift */; };
 		867FC4E42A9AB1DB00BCDA71 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867FC4E32A9AB1DB00BCDA71 /* FullScreenImageViewController.swift */; };
 		867FC4EA2A9BA62000BCDA71 /* SettingsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867FC4E92A9BA62000BCDA71 /* SettingsViewViewModel.swift */; };
 		867FC4EC2A9BF67300BCDA71 /* PersistantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867FC4EB2A9BF67300BCDA71 /* PersistantSettings.swift */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		860F02BD2AA0C0BA008D5022 /* BaseCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoreDataModel.swift; sourceTree = "<group>"; };
+		860F02BF2AA0C0DB008D5022 /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
+		860F02C22AA0C105008D5022 /* NasaSearchHistory.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NasaSearchHistory.xcdatamodel; sourceTree = "<group>"; };
+		860F02C42AA0C193008D5022 /* SearchHistory+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchHistory+Extensions.swift"; sourceTree = "<group>"; };
 		867FC4E32A9AB1DB00BCDA71 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		867FC4E92A9BA62000BCDA71 /* SettingsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewViewModel.swift; sourceTree = "<group>"; };
 		867FC4EB2A9BF67300BCDA71 /* PersistantSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistantSettings.swift; sourceTree = "<group>"; };
@@ -111,6 +119,8 @@
 		867FC4FA2A9CA0A900BCDA71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				860F02BD2AA0C0BA008D5022 /* BaseCoreDataModel.swift */,
+				860F02C42AA0C193008D5022 /* SearchHistory+Extensions.swift */,
 				86D8878B2A9936890010E2F3 /* Models.swift */,
 			);
 			path = Models;
@@ -161,6 +171,7 @@
 				86D887412A977E650010E2F3 /* Assets.xcassets */,
 				86D887432A977E650010E2F3 /* LaunchScreen.storyboard */,
 				86D887462A977E650010E2F3 /* Info.plist */,
+				860F02C12AA0C105008D5022 /* NasaSearchHistory.xcdatamodeld */,
 			);
 			path = NASA;
 			sourceTree = "<group>";
@@ -191,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				86D8875E2A9792D50010E2F3 /* NasaDataProvider.swift */,
+				860F02BF2AA0C0DB008D5022 /* CoreDataProvider.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -325,10 +337,13 @@
 				867FC4E42A9AB1DB00BCDA71 /* FullScreenImageViewController.swift in Sources */,
 				867FC5022A9CA7AA00BCDA71 /* ColorConstants.swift in Sources */,
 				86D887712A98A5690010E2F3 /* SettingsViewControllerView.swift in Sources */,
+				860F02C52AA0C193008D5022 /* SearchHistory+Extensions.swift in Sources */,
 				86D8877B2A98CE620010E2F3 /* CollectionViewSectionHeader.swift in Sources */,
+				860F02C02AA0C0DB008D5022 /* CoreDataProvider.swift in Sources */,
 				86D8875F2A9792D50010E2F3 /* NasaDataProvider.swift in Sources */,
 				86D887732A98A7190010E2F3 /* SettingsViewController.swift in Sources */,
 				867FC4FE2A9CA2FC00BCDA71 /* FullScreenImageView.swift in Sources */,
+				860F02C32AA0C105008D5022 /* NasaSearchHistory.xcdatamodeld in Sources */,
 				86D887772A98BB9C0010E2F3 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				86D887392A977E630010E2F3 /* AppDelegate.swift in Sources */,
 				86D8873B2A977E630010E2F3 /* SceneDelegate.swift in Sources */,
@@ -337,6 +352,7 @@
 				867FC4F02A9C832900BCDA71 /* JSONCoder.swift in Sources */,
 				86D887562A978FB10010E2F3 /* Logger.swift in Sources */,
 				867FC4F22A9C9C1800BCDA71 /* StringToDateConversion.swift in Sources */,
+				860F02BE2AA0C0BA008D5022 /* BaseCoreDataModel.swift in Sources */,
 				867FC5002A9CA74000BCDA71 /* FontConstatns.swift in Sources */,
 				867FC4EC2A9BF67300BCDA71 /* PersistantSettings.swift in Sources */,
 				86D887592A9790AE0010E2F3 /* Endpoint.swift in Sources */,
@@ -554,6 +570,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		860F02C12AA0C105008D5022 /* NasaSearchHistory.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				860F02C22AA0C105008D5022 /* NasaSearchHistory.xcdatamodel */,
+			);
+			currentVersion = 860F02C22AA0C105008D5022 /* NasaSearchHistory.xcdatamodel */;
+			path = NasaSearchHistory.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 86D8872D2A977E630010E2F3 /* Project object */;
 }
