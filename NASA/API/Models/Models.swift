@@ -25,7 +25,7 @@ struct Nasa: Codable {
 }
 
 // MARK: - Photo
-struct Photo: Codable {
+struct Photo: Codable, Equatable {
     let id: Int
     let imgSrc: String
 

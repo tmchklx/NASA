@@ -52,21 +52,28 @@ final class HomeViewController: UIViewController {
     }
 
     private func loadDataAtAppLaunch() {
-        homeViewModel.fetchData(for: .latestPhotos(rover: .curiosity))
+        homeViewModel.fetchData(for: .allRoversCameras(rover: .curiosity, date: "2023-08-01")) {
+            self.homeViewModel.loadBatch {
+                DispatchQueue.main.async {
+                    self.homeScreenView.marsPhotosCollectionView.reloadData()
+                }
+
+            }
+        }
     }
 
     private func handleReceivedData() {
-        homeViewModel.onDataReceived = { [ weak self ] in
+        homeViewModel.onDataReceived = { [ weak self ] didFetchNasaData in
             guard let self = self else {
                 Logger.error("Object seems to be already dealocated.")
                 return
             }
 
             DispatchQueue.main.async {
-                if self.homeViewModel.photos.count == 0 {
-                    self.showAlert()
-                } else {
+                if didFetchNasaData {
                     self.homeScreenView.marsPhotosCollectionView.reloadData()
+                } else {
+                    self.showAlert()
                 }
             }
         }
@@ -92,9 +99,14 @@ final class HomeViewController: UIViewController {
                 return
             }
 
-            self.homeViewModel.fetchData(for: viewModel.generatedEndpoint)
+            self.homeViewModel.fetchData(for: viewModel.generatedEndpoint) {
+                self.homeViewModel.loadBatch {
+                    DispatchQueue.main.async {
+                        self.homeScreenView.marsPhotosCollectionView.reloadData()
+                    }
+                }
+            }
         }
-        
         present(destinationViewController, animated: true)
     }
 }
@@ -103,7 +115,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationViewController = FullScreenImageViewController()
-        let key = NSString(string: homeViewModel.photos[indexPath.row].imgSrc)
+    let key = NSString(string: homeViewModel.fetchURLString(for: indexPath.row))
         destinationViewController.photo = homeViewModel.cache.object(forKey: key)
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
@@ -117,13 +129,23 @@ extension HomeViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarsPhotosCollectionViewCell.identifier, for: indexPath) as! MarsPhotosCollectionViewCell
+        cell.imageView.image = homeViewModel.photos[indexPath.row]
+        return cell
+    }
 
-        homeViewModel.loadPhoto(from: URL(string: homeViewModel.photos[indexPath.row].imgSrc)) { image in
-            DispatchQueue.main.async {
-                cell.imageView.image = image
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let contentHeight: CGFloat = 4000
+        let offsetY = scrollView.contentOffset.y - CGFloat((4000 * (homeViewModel.currentPage - 1)))
+        let visibleHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - visibleHeight {
+            self.homeScreenView.startAnimating()
+            homeViewModel.loadBatch {
+                DispatchQueue.main.async {
+                    self.homeScreenView.marsPhotosCollectionView.reloadData()
+                    self.homeScreenView.stopAnimating()
+                }
             }
         }
-
-        return cell
     }
 }
