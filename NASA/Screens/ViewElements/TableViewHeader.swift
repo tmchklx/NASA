@@ -7,8 +7,16 @@
 
 import UIKit
 
+fileprivate struct TableViewSectionHeaderConstraints {
+    let stackViewHorizontal: CGFloat = 25
+}
+
 final class TableViewSectionHeader: UITableViewHeaderFooterView {
     static let identifier = "TableViewHeader"
+    private let constraint = TableViewSectionHeaderConstraints()
+    private let labels = ["Rover:", "Camera:", "Date:"]
+    
+// MARK: - UI Elements
     let horizontalStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -30,29 +38,37 @@ final class TableViewSectionHeader: UITableViewHeaderFooterView {
         return label
     }
 
+// MARK: - Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        horizontalStackView.topAnchor.constraint(
+            equalTo: topAnchor).isActive = true
+        horizontalStackView.bottomAnchor.constraint(
+            equalTo: bottomAnchor).isActive = true
+        horizontalStackView.leadingAnchor.constraint(
+            equalTo: leadingAnchor, constant: constraint.stackViewHorizontal).isActive = true
+        horizontalStackView.trailingAnchor.constraint(
+            equalTo: trailingAnchor, constant: -constraint.stackViewHorizontal).isActive = true
+    }
+
+// MARK: - Initializers
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = ColorConstants.headerColor
         buildHierarchy()
     }
 
-    private func buildHierarchy() {
-        horizontalStackView.addArrangedSubview(createLabel(with: "Rover:"))
-        horizontalStackView.addArrangedSubview(createLabel(with: "Camera:"))
-        horizontalStackView.addArrangedSubview(createLabel(with: "Date:"))
-        addSubview(horizontalStackView)
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        horizontalStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        horizontalStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        horizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25).isActive = true
-    }
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+// MARK: Setup
+    private func buildHierarchy() {
+        for index in 0...2 {
+            horizontalStackView.addArrangedSubview(createLabel(with: labels[index]))
+        }
+
+        addSubview(horizontalStackView)
     }
 }
 

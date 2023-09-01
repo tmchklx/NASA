@@ -13,7 +13,7 @@ fileprivate struct HomeViewControllerConstants {
 
 final class HomeViewController: UIViewController {
     private let homeScreenView = HomeViewControllerView()
-    private let homeViewModel: HomeViewModel = HomeViewModel()
+    private let homeViewModel = HomeViewModel()
     private let constants = HomeViewControllerConstants()
 
     override func loadView() {
@@ -88,28 +88,17 @@ final class HomeViewController: UIViewController {
                 if didFetchNasaData {
                     self.homeScreenView.marsPhotosCollectionView.reloadData()
                 } else {
-                    self.showAlert()
+                    Alerts.showNoPhotosFetchedAlert(on: self)
                 }
             }
         }
     }
 
-    private func showAlert() {
-        let alertController = UIAlertController(title: "No Date Received",
-                                                message: "Seems that selected rover didn't take any pictures with selected options. Try to choose different configuration.",
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-
-    // MARK: - Handling taps
+    // MARK: - Selectors
     @objc private func settingsButtonTapped() {
         let destinationViewController = SettingsViewController()
         destinationViewController.modalPresentationStyle = .popover
         destinationViewController.passDataOnDismiss = { [ weak self ] dataModel in
-
             guard let self = self else {
                 Logger.error("Object seems to be already dealocated.")
                 return
@@ -141,7 +130,6 @@ final class HomeViewController: UIViewController {
                 Logger.error("Object seems to be already dealocated.")
                 return
             }
-
             self.homeScreenView.startAnimating()
             self.homeViewModel.fetchData(for: dataModel.generatedEndpoint) {
                 self.homeViewModel.loadBatch {
@@ -180,11 +168,12 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // Since one batch contains 20 photos, we are checking how far did user scroll to decide if we need to load a new one
         let contentHeight: CGFloat = 4000
         let offsetY = scrollView.contentOffset.y - CGFloat((4000 * (homeViewModel.currentPage - 1)))
         let visibleHeight = scrollView.frame.size.height
 
-        if offsetY > contentHeight - visibleHeight {
+        if offsetY > contentHeight - visibleHeight - 125 {
             self.homeScreenView.startAnimating()
             homeViewModel.loadBatch {
                 DispatchQueue.main.async {

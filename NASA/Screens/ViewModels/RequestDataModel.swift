@@ -8,10 +8,10 @@
 import UIKit
 
 class RequestDataModel {
-    var date: String = PersistantSettings.shared.date
-    var rover: Rover = PersistantSettings.shared.rover
-    var camera: Camera = PersistantSettings.shared.camera
-    var isSearchSuccessful: Bool = false
+    var date: String
+    var rover: Rover
+    var camera: Camera
+    var isSearchSuccessful: Bool
 
     var generatedEndpoint: Endpoint {
         if camera == .all {

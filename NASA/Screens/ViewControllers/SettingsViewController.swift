@@ -11,6 +11,7 @@ fileprivate struct SettingsViewControllerConstants {
     let headerHeight: CGFloat = 30
     let cellHeight: CGFloat = 40
     let cellPadding: CGFloat = 20
+    let interItemSpacing: CGFloat = 7
 }
 
 final class SettingsViewController: UIViewController {
@@ -45,7 +46,7 @@ final class SettingsViewController: UIViewController {
         )
     }
 
-// MARK: - selectors
+// MARK: - Selectors
     @objc func applySettings() {
         viewModel.camera = PersistantSettings.shared.camera
         viewModel.rover = PersistantSettings.shared.rover
@@ -74,7 +75,6 @@ extension SettingsViewController: UICollectionViewDelegate {
         }
 
         settingsView.diselectPreviousCellAndSelectCurrent(at: indexPath)
-
     }
 }
 
@@ -93,7 +93,7 @@ extension SettingsViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 7
+        return constants.interItemSpacing
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

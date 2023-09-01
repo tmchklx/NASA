@@ -43,16 +43,6 @@ final class SearchHistoryViewController: UIViewController {
         searchHistoryViewModel.clearHistory()
         searchHistoryView.tableView.reloadData()
     }
-
-    private func showAlert() {
-        let alertController = UIAlertController(title: "No Date Received",
-                                                message: "Rover didn't take any photos with selected options.",
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 // MARK: UITableViewDataSource
@@ -70,10 +60,6 @@ extension SearchHistoryViewController: UITableViewDataSource {
             isSearchSuccessful: searchHistoryViewModel.history[indexPath.row].isSearchSuccessful)
         cell.configureCell(model)
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -104,8 +90,9 @@ extension SearchHistoryViewController: UITableViewDelegate {
             if let navigationController = navigationController {
                 navigationController.popToRootViewController(animated: true)
             }
+
         } else {
-            showAlert()
+            Alerts.showUnseccessfulSearch(on: self)
         }
     }
 }

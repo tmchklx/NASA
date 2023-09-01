@@ -15,7 +15,6 @@ class MarsPhotosCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: ImageName.placeHolder)
         return imageView
     }()
 
