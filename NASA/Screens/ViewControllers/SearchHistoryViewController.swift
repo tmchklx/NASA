@@ -43,6 +43,16 @@ final class SearchHistoryViewController: UIViewController {
         searchHistoryViewModel.clearHistory()
         searchHistoryView.tableView.reloadData()
     }
+
+    private func showAlert() {
+        let alertController = UIAlertController(title: "No Date Received",
+                                                message: "Rover didn't take any photos with selected options.",
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -56,7 +66,8 @@ extension SearchHistoryViewController: UITableViewDataSource {
         let model = RequestDataModel(
             rover: searchHistoryViewModel.history[indexPath.row].rover,
             camera: searchHistoryViewModel.history[indexPath.row].camera,
-            date: searchHistoryViewModel.history[indexPath.row].date)
+            date: searchHistoryViewModel.history[indexPath.row].date,
+            isSearchSuccessful: searchHistoryViewModel.history[indexPath.row].isSearchSuccessful)
         cell.configureCell(model)
         return cell
     }
@@ -79,15 +90,22 @@ extension SearchHistoryViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = RequestDataModel(
-            rover: searchHistoryViewModel.history[indexPath.row].rover,
-            camera: searchHistoryViewModel.history[indexPath.row].camera,
-            date: searchHistoryViewModel.history[indexPath.row].date)
+        let searchQuery = searchHistoryViewModel.history[indexPath.row]
 
-        passDataOnDismiss?(model)
+        if searchQuery.isSearchSuccessful {
+            let model = RequestDataModel(
+                rover: searchQuery.rover,
+                camera: searchQuery.camera,
+                date: searchQuery.date
+            )
 
-        if let navigationController = navigationController {
-            navigationController.popToRootViewController(animated: true)
+            passDataOnDismiss?(model)
+
+            if let navigationController = navigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
+        } else {
+            showAlert()
         }
     }
 }

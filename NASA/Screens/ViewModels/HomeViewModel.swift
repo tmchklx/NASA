@@ -44,6 +44,7 @@ final class HomeViewModel {
         query.rover = model.rover.rawValue
         query.camera = model.camera.rawValue
         query.date = model.date
+        query.isSearchSuccessful = model.isSearchSuccessful
         query.save()
     }
 
