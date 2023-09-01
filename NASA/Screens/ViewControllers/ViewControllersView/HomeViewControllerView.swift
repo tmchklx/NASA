@@ -47,6 +47,7 @@ final class HomeViewControllerView: UIView {
         return button
     }()
 
+// MARK: - NSLayoutConstraints
     private lazy var collectionConstraintsWithProgressView = [
         marsPhotosCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
         marsPhotosCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -65,21 +66,15 @@ final class HomeViewControllerView: UIView {
         progressView.centerXAnchor.constraint(equalTo: centerXAnchor),
         progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
     ]
-
-
-// MARK: - Views layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        NSLayoutConstraint.activate(collectionConstraintsWithoutProgressView)
-
-    }
-
+    
+// MARK: - Handle animation
     func startAnimating() {
+        // Settign intsets back to zero so scrolling work properly
+        marsPhotosCollectionView.contentInset = UIEdgeInsets.zero
         NSLayoutConstraint.deactivate(collectionConstraintsWithoutProgressView)
         addSubview(progressView)
         NSLayoutConstraint.activate(progressViewConstraints)
         NSLayoutConstraint.activate(collectionConstraintsWithProgressView)
-
         progressView.startAnimating()
     }
 
@@ -89,12 +84,15 @@ final class HomeViewControllerView: UIView {
         NSLayoutConstraint.activate(collectionConstraintsWithoutProgressView)
         progressView.stopAnimating()
         progressView.removeFromSuperview()
+        // This inset is needed when loading a new batch of photos so collectionView will not scroll down
+        marsPhotosCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 125, right: 0)
     }
 
 // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildHierarchy()
+        NSLayoutConstraint.activate(collectionConstraintsWithoutProgressView)
     }
 
     required init?(coder: NSCoder) {

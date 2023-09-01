@@ -7,15 +7,23 @@
 
 import UIKit
 
+fileprivate struct SearchHistoryCellConstraints {
+    let containerViewHorizontal: CGFloat = 5
+    let containerViewTopAnchor: CGFloat = 10
+    let containerViewHeight: CGFloat = 50
+    let horizontalStackViewHorizontal: CGFloat = 20
+}
+
 final class SearchHistoryCell: UITableViewCell {
     static let identifier = "SearchHistoryCell"
-
+    private let constraint = SearchHistoryCellConstraints()
+    
+// MARK: - UI Elements
     private let containerView: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.layer.cornerRadius = 10
         container.layer.masksToBounds = true
-//        container.backgroundColor = ColorConstants.searchHistoryCellBackground
         return container
     }()
 
@@ -38,27 +46,34 @@ final class SearchHistoryCell: UITableViewCell {
         }()
     }
 
-
+// MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
+        containerView.topAnchor.constraint(
+            equalTo: topAnchor,
+            constant: constraint.containerViewTopAnchor).isActive = true
+        containerView.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: constraint.containerViewHorizontal).isActive = true
+        containerView.trailingAnchor.constraint(
+            equalTo: trailingAnchor,
+            constant: -constraint.containerViewHorizontal).isActive = true
+        containerView.bottomAnchor.constraint(
+            equalTo: containerView.topAnchor,
+            constant: constraint.containerViewHeight).isActive = true
 
-        containerView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: 50).isActive = true
-
-        horizontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        horizontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -20).isActive = true
-        horizontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        horizontalStackView.topAnchor.constraint(
+            equalTo: containerView.topAnchor).isActive = true
+        horizontalStackView.leadingAnchor.constraint(
+            equalTo: containerView.leadingAnchor,
+            constant: constraint.horizontalStackViewHorizontal).isActive = true
+        horizontalStackView.trailingAnchor.constraint(
+            equalTo: containerView.trailingAnchor,
+            constant:  -constraint.horizontalStackViewHorizontal).isActive = true
+        horizontalStackView.bottomAnchor.constraint(
+            equalTo: containerView.bottomAnchor).isActive = true
     }
-
-    private func buildHierarchy() {
-        containerView.addSubview(horizontalStackView)
-        addSubview(containerView)
-
-    }
-
+// MARK: - Initializers
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -68,8 +83,9 @@ final class SearchHistoryCell: UITableViewCell {
         buildHierarchy()
     }
 
+// MARK: - Cell setup
     func configureCell(_ model: RequestDataModel) {
-        horizontalStackView.addArrangedSubview(createLabel(withText: model.rover.rawValue))
+        horizontalStackView.addArrangedSubview(createLabel(withText: model.rover.rawValue.capitalized))
         horizontalStackView.addArrangedSubview(createLabel(withText: model.camera.rawValue))
         horizontalStackView.addArrangedSubview(createLabel(withText: model.date))
 
@@ -78,6 +94,11 @@ final class SearchHistoryCell: UITableViewCell {
         } else {
             containerView.backgroundColor = ColorConstants.unsuccessfulSearchCell
         }
+    }
+
+    private func buildHierarchy() {
+        containerView.addSubview(horizontalStackView)
+        addSubview(containerView)
     }
 }
 
