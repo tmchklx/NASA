@@ -12,7 +12,7 @@ final class SearchHistoryTableViewModel {
     var history = [SearchHistoryViewModel]()
 
     init() {
-        let searchHistory: [SearchHistory] = SearchHistory.all()
+        let searchHistory: [SearchHistory] = SearchHistory.all().reversed()
         self.history = searchHistory.map(SearchHistoryViewModel.init)
     }
 
@@ -48,5 +48,9 @@ struct SearchHistoryViewModel: Hashable {
 
     var date: String {
         historyQuery.date ?? Date().convertToString
+    }
+
+    var isSearchSuccessful: Bool {
+        historyQuery.isSearchSuccessful
     }
 }

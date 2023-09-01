@@ -109,18 +109,24 @@ final class HomeViewController: UIViewController {
         let destinationViewController = SettingsViewController()
         destinationViewController.modalPresentationStyle = .popover
         destinationViewController.passDataOnDismiss = { [ weak self ] dataModel in
-            self?.homeViewModel.saveSearchToDataBase(with: dataModel)
 
             guard let self = self else {
                 Logger.error("Object seems to be already dealocated.")
                 return
             }
 
+            self.homeScreenView.startAnimating()
             self.homeViewModel.fetchData(for: dataModel.generatedEndpoint) {
                 self.homeViewModel.loadBatch {
+                    if self.homeViewModel.didFetchNasaData {
+                        dataModel.isSearchSuccessful = true
+                    }
+
+                    self.homeViewModel.saveSearchToDataBase(with: dataModel)
                     DispatchQueue.main.async {
+                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint(x: 0, y: -90), animated: true)
                         self.homeScreenView.marsPhotosCollectionView.reloadData()
-                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint.zero, animated: true)
+                        self.homeScreenView.stopAnimating()
                     }
                 }
             }
@@ -136,11 +142,13 @@ final class HomeViewController: UIViewController {
                 return
             }
 
+            self.homeScreenView.startAnimating()
             self.homeViewModel.fetchData(for: dataModel.generatedEndpoint) {
                 self.homeViewModel.loadBatch {
                     DispatchQueue.main.async {
+                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint(x: 0, y: -90), animated: true)
                         self.homeScreenView.marsPhotosCollectionView.reloadData()
-                        self.homeScreenView.marsPhotosCollectionView.setContentOffset(CGPoint.zero, animated: true)
+                        self.homeScreenView.stopAnimating()
                     }
                 }
             }

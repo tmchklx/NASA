@@ -15,7 +15,7 @@ final class SearchHistoryCell: UITableViewCell {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.layer.cornerRadius = 10
         container.layer.masksToBounds = true
-        container.backgroundColor = ColorConstants.searchHistoryCellBackground
+//        container.backgroundColor = ColorConstants.searchHistoryCellBackground
         return container
     }()
 
@@ -72,6 +72,12 @@ final class SearchHistoryCell: UITableViewCell {
         horizontalStackView.addArrangedSubview(createLabel(withText: model.rover.rawValue))
         horizontalStackView.addArrangedSubview(createLabel(withText: model.camera.rawValue))
         horizontalStackView.addArrangedSubview(createLabel(withText: model.date))
+
+        if model.isSearchSuccessful {
+            containerView.backgroundColor = ColorConstants.successfulSearchCell
+        } else {
+            containerView.backgroundColor = ColorConstants.unsuccessfulSearchCell
+        }
     }
 }
 
