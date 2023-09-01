@@ -9,5 +9,6 @@ import UIKit
 
 struct FontConstants {
     static let boldHeader = UIFont.boldSystemFont(ofSize: 24)
+    static let boldSubHeader = UIFont.boldSystemFont(ofSize: 18)
     static let cell = UIFont.systemFont(ofSize: 17)
 }

@@ -25,7 +25,7 @@ struct Nasa: Codable {
 }
 
 // MARK: - Photo
-struct Photo: Codable {
+struct Photo: Codable, Equatable {
     let id: Int
     let imgSrc: String
 
@@ -35,6 +35,7 @@ struct Photo: Codable {
     }
 }
 
+// MARK: - Enums for working with nasa data
 protocol Enumeratable: CaseIterable where Self: RawRepresentable {
     associatedtype T
     var allItems: [T] { get }
@@ -57,6 +58,10 @@ enum Rover: String, CaseIterable, Enumeratable {
     case curiosity
     case opportunity
     case spirit
+
+    init(from rawValue: String) {
+        self = Rover(rawValue: rawValue) ?? .curiosity
+    }
 }
 
 enum Camera: String, CaseIterable, Enumeratable {
@@ -72,4 +77,8 @@ enum Camera: String, CaseIterable, Enumeratable {
     case navcam
     case pancam
     case minites
+
+    init(from rawValue: String) {
+        self = Camera(rawValue: rawValue) ?? .all
+    }
 }

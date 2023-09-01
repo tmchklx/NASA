@@ -47,6 +47,7 @@ final class SettingsViewControllerView: UIView {
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
+        picker.maximumDate = Date()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.date = PersistantSettings.shared.date.convertToDate ?? Date()
         return picker

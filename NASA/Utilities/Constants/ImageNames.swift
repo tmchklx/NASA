@@ -10,4 +10,5 @@ import Foundation
 struct ImageName {
     static let placeHolder = "placeholderImage"
     static let slider = "slider.horizontal.3"
+    static let searchHistory = "book"
 }
